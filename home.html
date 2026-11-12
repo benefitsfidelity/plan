@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fidelity Investments - Retirement, Investing, and Financial Planning</title>
+<link rel="icon" href="https://www.fidelity.com/favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #368727;
+    --green-hover: #2a691e;
+    --text: #1a1a1a;
+    --text-light: #666;
+    --bg: #fff;
+    --bg-alt: #f4f6f4;
+    --border: #e0e0e0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Roboto', Arial, sans-serif;
+    color: var(--text);
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #fff;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 72px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-left { display: flex; align-items: center; gap: 32px; }
+  .nav-left img { height: 28px; display: block; }
+  .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: var(--green); }
+  
+  .nav-right { display: flex; align-items: center; gap: 24px; font-size: 14px; font-weight: 500; }
+  .search-bar {
+    display: flex; align-items: center;
+    border: 1px solid #ccc; border-radius: 20px;
+    padding: 8px 16px; width: 260px; background-color: #f9f9f9;
+  }
+  .search-bar input {
+    border: none; outline: none; font-size: 14px;
+    width: 100%; margin-left: 8px; font-family: inherit; background: transparent;
+  }
+  
+  .btn-login {
+    background-color: var(--green); color: #fff;
+    padding: 10px 24px; border-radius: 20px; cursor: pointer;
+    transition: background 0.2s; border: none; font-family: inherit;
+    font-size: 14px; font-weight: 700;
+  }
+  .btn-login:hover { background-color: var(--green-hover); }
+  .link-green { color: var(--green); font-weight: 700; }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    height: 500px;
+    background-color: #e0e0e0;
+    background-image: url('https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/hero-images/Wealth-brand-banner-new-2.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+  }
+  .hero-card {
+    background-color: #fff;
+    max-width: 480px;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .hero-card h1 {
+    font-size: 44px; line-height: 1.1;
+    margin: 0 0 20px 0; color: #222;
+    font-weight: 700; letter-spacing: -1px;
+  }
+  .hero-card p {
+    font-size: 18px; line-height: 1.5;
+    margin-bottom: 32px; color: #333;
+  }
+  .hero-buttons { display: flex; gap: 16px; }
+  .btn-outline {
+    border: 1px solid #333; background: transparent;
+    padding: 12px 24px; border-radius: 24px;
+    font-weight: 700; cursor: pointer; font-family: inherit;
+    font-size: 14px;
+  }
+
+  /* Scroll Reveal Section */
+  .feature-tabs-section {
+    padding: 80px 40px;
+    background: #fff;
+  }
+  .feature-tabs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 60px;
+  }
+  .tabs-menu {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .tab-btn {
+    text-align: left;
+    background: none; border: none;
+    padding: 16px; font-size: 18px;
+    font-weight: 500; color: #666;
+    cursor: pointer; border-left: 3px solid transparent;
+    font-family: inherit;
+  }
+  .tab-btn.active {
+    color: var(--green);
+    border-left: 3px solid var(--green);
+    font-weight: 700;
+  }
+  .tab-content { flex: 1; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+  .tab-pane h2 {
+    font-size: 32px; font-weight: 700;
+    color: #222; margin: 0 0 32px 0;
+  }
+  .row-set { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
+  .row-item-title { font-size: 18px; font-weight: 700; color: #222; margin-bottom: 4px; }
+  .row-item-desc { font-size: 16px; color: #555; line-height: 1.5; }
+  .tab-image {
+    width: 100%; height: 400px;
+    background-color: #eee; border-radius: 8px;
+    background-size: cover; background-position: center;
+    margin-top: 24px;
+  }
+  .tab-ctas { display: flex; gap: 24px; align-items: center; }
+  .cta-tertiary {
+    color: var(--green); font-weight: 700; font-size: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* Feature Blocks */
+  .feature-block {
+    padding: 80px 40px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .feature-block.creme { background-color: #f4f1e8; }
+  .feature-block.white { background-color: #fff; }
+  .block-content {
+    max-width: 1200px; display: flex; gap: 60px; align-items: center;
+  }
+  .block-image { flex: 1; }
+  .block-image img { width: 100%; border-radius: 8px; }
+  .block-text { flex: 1; }
+  .block-text h2 { font-size: 36px; color: #222; margin: 0 0 24px 0; font-weight: 700;}
+  .block-text p { font-size: 18px; color: #555; line-height: 1.6; margin-bottom: 32px; }
+  .block-text ul { padding-left: 20px; font-size: 18px; color: #555; line-height: 1.8; margin-bottom: 32px; }
+
+  /* Cards Section */
+  .cards-section { padding: 80px 40px; background-color: #f4f1e8; }
+  .cards-header { text-align: center; font-size: 36px; font-weight: 700; color: #222; margin-bottom: 48px; }
+  .cards-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+  }
+  .card {
+    background: #fff; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .card img { width: 100%; height: 200px; object-fit: cover; }
+  .card-content { padding: 24px; }
+  .card-content h3 { font-size: 20px; margin: 0 0 16px 0; font-weight: 700; }
+  .card-content p { font-size: 16px; color: #555; margin-bottom: 24px; }
+  .card-info { font-size: 14px; color: #888; display: flex; gap: 16px; }
+
+  /* Footer */
+  .footer {
+    background-color: #fff; padding: 60px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: #666; line-height: 1.6;
+  }
+  .footer-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+  }
+  .footer-col h4 { font-size: 14px; color: #333; margin-bottom: 16px; font-weight: 700; }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col li { margin-bottom: 8px; }
+  .footer-col a:hover { text-decoration: underline; }
+
+  /* Responsive adjustments */
+  @media (max-width: 900px) {
+    .nav-links, .search-bar, .link-green { display: none; }
+    .navbar { padding: 0 20px; }
+    .nav-right { gap: 12px; }
+    
+    .hero { 
+      padding: 40px 20px; 
+      align-items: center; 
+      justify-content: flex-start; 
+      height: auto; 
+      min-height: 500px;
+    }
+    .hero-card { 
+      max-width: 85%; 
+      padding: 24px; 
+      margin: 0;
+    }
+    .hero-card h1 { font-size: 28px; }
+    .hero-card p { font-size: 15px; margin-bottom: 24px; }
+    .hero-buttons { flex-direction: column; gap: 12px; }
+    .hero-buttons .btn-login, .hero-buttons .btn-outline { width: 100%; padding: 12px; }
+    
+    .feature-tabs-section { padding: 40px 20px; }
+    .feature-tabs-container { flex-direction: column; gap: 32px; }
+    .tabs-menu { flex-direction: row; width: 100%; overflow-x: auto; white-space: nowrap; padding-bottom: 8px; }
+    .tab-btn { border-left: none; border-bottom: 3px solid transparent; padding: 12px; font-size: 16px; }
+    .tab-btn.active { border-left: none; border-bottom: 3px solid var(--green); }
+    .tab-pane h2 { font-size: 24px; }
+    .tab-image { height: 250px; }
+    
+    .feature-block { padding: 40px 20px; }
+    .block-content { flex-direction: column; gap: 32px; }
+    .block-content.reverse { flex-direction: column-reverse; }
+    .block-text h2 { font-size: 28px; }
+    
+    .cards-section { padding: 40px 20px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    
+    .footer { padding: 40px 20px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  
+  @media (max-width: 500px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .tab-ctas { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="nav-left">
+    <img src="https://digital.fidelity.com/prgw/digital/signin/assets/images/Fid_Wordmark-Logo_Green.svg" alt="Fidelity">
+    <div class="nav-links">
+      <a href="#">Accounts & Trade</a>
+      <a href="#">Investing</a>
+      <a href="#">Retirement</a>
+      <a href="#">Wealth Management</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="search-bar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" placeholder="How can we help?">
+    </div>
+    <button class="btn-login" onclick="window.location.href='signin'">Log In</button>
+    <a href="#" class="link-green">Open an account</a>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-card">
+    <h1>We'll help you keep moving forward</h1>
+    <p>With our insights and disciplined approach, we've helped generations of customers navigate through all kinds of markets.</p>
+    <div class="hero-buttons">
+      <button class="btn-login" style="padding: 14px 32px; font-size: 16px;">Open an account</button>
+      <button class="btn-outline">I need guidance</button>
+    </div>
+  </div>
+</div>
+
+<!-- Feature Tabs -->
+<div class="feature-tabs-section">
+  <div class="feature-tabs-container">
+    <div class="tabs-menu">
+      <button class="tab-btn active" data-target="tab1">Start investing</button>
+      <button class="tab-btn" data-target="tab2">Save for retirement</button>
+      <button class="tab-btn" data-target="tab3">Save for health care</button>
+      <button class="tab-btn" data-target="tab4">Invest for a child</button>
+    </div>
+    
+    <div class="tab-content">
+      <!-- Tab 1 -->
+      <div id="tab1" class="tab-pane active">
+        <h2>Invest smart from the start with a brokerage account</h2>
+        <div class="row-set">
+          <div class="row-item">
+            <div class="row-item-title">$0 account fees</div>
+            <div class="row-item-desc">Keep your money working toward your goals.</div>
+          </div>
+          <div class="row-item">
+            <div class="row-item-title">$0 commissions</div>
+            <div class="row-item-desc">Trade US stocks and ETFs commission free online.</div>
+          </div>
+          <div class="row-item">
+            <div class="row-item-title">Trade any amount</div>
+            <div class="row-item-desc">Buy US stocks and ETFs for as little as $1 with fractional shares.</div>
+          </div>
+        </div>
+        <div class="tab-ctas">
+          <button class="btn-login">Open a brokerage account</button>
+          <a href="#" class="cta-tertiary">Explore ways to invest &rarr;</a>
+        </div>
+        <div class="tab-image" style="background-image: url('https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/offering-images/STR_iPhone.jpg');"></div>
+      </div>
+
+      <!-- Tab 2 -->
+      <div id="tab2" class="tab-pane">
+        <h2>Plan for the possibilities ahead with a Roth IRA</h2>
+        <div class="row-set">
+          <div class="row-item">
+            <div class="row-item-title">Tax savings</div>
+            <div class="row-item-desc">Any investment growth in a Roth is tax-free, with tax-free withdrawals in retirement.</div>
+          </div>
+          <div class="row-item">
+            <div class="row-item-title">Access to your contributions</div>
+            <div class="row-item-desc">Any amount you add to your Roth can be withdrawn without taxes or penalties, anytime, for any reason.</div>
+          </div>
+          <div class="row-item">
+            <div class="row-item-title">Numerous ways to invest</div>
+            <div class="row-item-desc">Whether you invest on your own or have us do it, you can choose from stocks to ETFs to crypto and more.</div>
+          </div>
+        </div>
+        <div class="tab-ctas">
+          <button class="btn-login">Open a Roth IRA</button>
+          <a href="#" class="cta-tertiary">Explore retirement planning &rarr;</a>
+        </div>
+        <div class="tab-image" style="background-image: url('https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/offering-images/Save-retirement-new-image-6-23.jpg');"></div>
+      </div>
+
+      <!-- Tab 3 -->
+      <div id="tab3" class="tab-pane">
+        <h2>Save, earn, and invest for health care with an HSA</h2>
+        <div class="row-set">
+          <div class="row-item">
+            <div class="row-item-title">Triple-tax advantage</div>
+            <div class="row-item-desc">Get tax-deductible contributions, no immediate tax on earnings, and tax-free withdrawals for qualified medical expenses.</div>
+          </div>
+          <div class="row-item">
+            <div class="row-item-title">No account fees</div>
+            <div class="row-item-desc">Fidelity’s HSA has no account fees or minimums, and $0 commissions for US stock & ETF trades.</div>
+          </div>
+          <div class="row-item">
+            <div class="row-item-title">Not “use-it-or-lose-it”</div>
+            <div class="row-item-desc">The money’s always yours. You can earn interest on cash, grow your account by investing, or do both.</div>
+          </div>
+        </div>
+        <div class="tab-ctas">
+          <button class="btn-login">Open an HSA</button>
+          <a href="#" class="cta-tertiary">Explore health savings at Fidelity &rarr;</a>
+        </div>
+        <div class="tab-image" style="background-image: url('https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/offering-images/HSA-new-image-6-23.jpg');"></div>
+      </div>
+
+      <!-- Tab 4 -->
+      <div class="tab-pane" id="tab4">
+        <h2>Save for the next generation’s education with a 529 account</h2>
+        <div class="row-set">
+          <div class="row-item">
+            <div class="row-item-title">Tax-smart savings</div>
+            <div class="row-item-desc">Any earnings grow federal income tax-deferred, and you can get tax-free withdrawals for qualified education expenses.</div>
+          </div>
+          <div class="row-item">
+            <div class="row-item-title">Flexible use of funds</div>
+            <div class="row-item-desc">Pay for college, trade school, and K–12 nationwide, including tuition, fees, and books.</div>
+          </div>
+          <div class="row-item">
+            <div class="row-item-title">Your money can work harder</div>
+            <div class="row-item-desc">No minimums to open and no account fees. Plus, start early and your money could potentially grow more.</div>
+          </div>
+        </div>
+        <div class="tab-ctas">
+          <button class="btn-login">Open a 529 account</button>
+          <a href="#" class="cta-tertiary">Explore saving for a child &rarr;</a>
+        </div>
+        <div class="tab-image" style="background-image: url('https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/offering-images/529-new-image-6-23.jpg');"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Feature Block 1 (Advisor) -->
+<div class="feature-block white">
+  <div class="block-content">
+    <div class="block-image">
+      <img src="https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/image-feature-images/Wealth-plan-possibilities-new.jpg" alt="Advisor">
+    </div>
+    <div class="block-text">
+      <h2>A partner to help bring your plans to life</h2>
+      <p>Collaborate with a dedicated Fidelity advisor to build a comprehensive wealth management strategy designed to help you meet your goals and evolving needs.</p>
+      <button class="btn-login">Find an advisor</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cards Section -->
+<div class="cards-section">
+  <h2 class="cards-header">Expertise you can act on</h2>
+  <div class="cards-grid">
+    <div class="card">
+      <img src="https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/learn-carousel-01-image-01.jpg" alt="HSA">
+      <div class="card-content">
+        <h3>3 ways to use your health savings account</h3>
+        <p>Know the type of HSA user you are, then see how to make your money work harder.</p>
+        <div class="card-info">
+          <span>Article</span>
+          <span>6 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/learn-card-carousel-images/MarketSense_LCUpdate.jpg" alt="Market Sense">
+      <div class="card-content">
+        <h3>Market Sense: Weekly insights</h3>
+        <p>Our experts discuss the latest headlines, current market conditions, and what it all means for you.</p>
+        <div class="card-info">
+          <span>Webinar</span>
+          <span>24 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/learn-card-carousel-images/learn-carousel-03-image-01.jpg" alt="Investing">
+      <div class="card-content">
+        <h3>How to start investing</h3>
+        <p>It doesn't have to be overly complicated. Here's how to start.</p>
+        <div class="card-info">
+          <span>Article</span>
+          <span>6 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Feature Block 2 (Why Fidelity) -->
+<div class="feature-block white">
+  <div class="block-content reverse">
+    <div class="block-text">
+      <h2>Why choose Fidelity?</h2>
+      <p>Our objective insights and disciplined approach have helped generations of customers through all kinds of markets.</p>
+      <ul>
+        <li>A clear, straightforward experience</li>
+        <li>Guidance as life changes</li>
+        <li>A wider range of integrated tools and products</li>
+        <li>Value and transparency at every step</li>
+      </ul>
+    </div>
+    <div class="block-image">
+      <img src="https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/image-feature-images/HP-why-fidelity-small-6-24.jpg" alt="Why Fidelity">
+    </div>
+  </div>
+</div>
+
+<!-- Feature Block 3 (Get Started) -->
+<div class="feature-block creme">
+  <div class="block-content">
+    <div class="block-image">
+      <img src="https://www.fidelity.com/bin-public/600_Fidelity_Com_English/images/homepage/image-feature-images/image-feature-02-looking-for-something-else-01-screen.png" alt="Get Started">
+    </div>
+    <div class="block-text">
+      <h2>Looking for something else?</h2>
+      <p>Answer a few questions about your goals and we'll show account options that could work for you.</p>
+      <button class="btn-outline" style="color: #333; border-color: #333;">Get started</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Accounts & Trade</h4>
+      <ul>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Cash Management</a></li>
+        <li><a href="#">Transfers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Investing</h4>
+      <ul>
+        <li><a href="#">Stocks</a></li>
+        <li><a href="#">Mutual Funds</a></li>
+        <li><a href="#">ETFs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Retirement</h4>
+      <ul>
+        <li><a href="#">IRAs</a></li>
+        <li><a href="#">401(k) Rollover</a></li>
+        <li><a href="#">Retirement Planning</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Customer Service</h4>
+      <ul>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Security Center</a></li>
+        <li><a href="#">Site Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="max-width: 1200px; margin: 40px auto 0; border-top: 1px solid #ddd; padding-top: 24px;">
+    Fidelity Brokerage Services LLC, Member NYSE, SIPC. <br>
+    © 2026 FMR LLC. All rights reserved.
+  </div>
+</div>
+
+<script>
+  // Tab Switching Logic
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanes.forEach(p => p.classList.remove('active'));
+      
+      btn.classList.add('active');
+      const targetId = btn.getAttribute('data-target');
+      document.getElementById(targetId).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

